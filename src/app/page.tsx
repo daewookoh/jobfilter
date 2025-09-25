@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import { LatestPost } from "~/app/_components/post";
+import { UserMenu } from "~/app/_components/auth/UserMenu";
 import { api, HydrateClient } from "~/trpc/server";
 
 export default async function Home() {
@@ -10,42 +9,44 @@ export default async function Home() {
 
   return (
     <HydrateClient>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-          </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
+      <main className="flex min-h-screen flex-col bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+        {/* Header */}
+        <header className="w-full px-4 py-6">
+          <div className="container mx-auto flex items-center justify-between">
+            <h1 className="text-2xl font-bold">스튜디오 초비</h1>
+            <UserMenu />
           </div>
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-2xl text-white">
-              {hello ? hello.greeting : "Loading tRPC query..."}
-            </p>
-          </div>
+        </header>
 
-          <LatestPost />
+        {/* Main Content */}
+        <div className="flex flex-1 items-center justify-center">
+          <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
+            <h1 className="text-center text-5xl font-extrabold tracking-tight sm:text-[5rem]">
+              스튜디오 <span className="text-[hsl(280,100%,70%)]">초비</span>
+            </h1>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
+              <div className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20">
+                <h3 className="text-2xl font-bold">직업 필터링</h3>
+                <div className="text-lg">
+                  원하는 조건에 맞는 직업을 찾아보세요. 다양한 필터 옵션을
+                  제공합니다.
+                </div>
+              </div>
+              <div className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20">
+                <h3 className="text-2xl font-bold">맞춤 추천</h3>
+                <div className="text-lg">
+                  개인 취향과 경험을 바탕으로 최적의 직업을 추천해드립니다.
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-2xl text-white">
+                {hello ? hello.greeting : "Loading tRPC query..."}
+              </p>
+            </div>
+
+            <LatestPost />
+          </div>
         </div>
       </main>
     </HydrateClient>
